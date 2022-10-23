@@ -1,13 +1,21 @@
+<-- 引入 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+<-- 添加一个容器-->
 <div id="gitalk-container"></div>
- <script>
+
+<-- 生成 gitalk 插件-->
 var gitalk = new Gitalk({
-  clientID: '250c7af2adb9f382bce7', // GitHub Application Client ID
-  clientSecret: 'fdf3fc8ad198cd98faf9d76a6fa2caeb1e1366e4', // GitHub Application Client Secret
-  repo: 'gitalk-comment'      // 存放评论的仓库
-  owner: 'xieyeheng',          // 仓库的创建者，
-  admin: ['xieyeheng'],        // 如果仓库有多个人可以操作，那么在这里以数组形式写出
-  id: location.href,      // 用于标记评论是哪个页面的，确保唯一，并且长度小于50
+  clientID: '250c7af2adb9f382bce7', //Client ID
+
+  clientSecret: 'f0bc52aa6ec14154386da13bde2364555cf222cf', //Client Secret
+
+  repo: 'gitalk-repo',//仓库名称
+  owner: 'xieyeheng',//仓库拥有者
+  admin: ['xieyeheng'],
+  id: location.href,      // Ensure uniqueness and length less than 50
+  distractionFreeMode: false  // Facebook-like distraction free mode
 })
 
-gitalk.render('gitalk-container');    // 渲染Gitalk评论组件
-    </script>
+gitalk.render('gitalk-container')
