@@ -10,7 +10,8 @@
 ## Step 2
 准备好软件后，我们需要安装并配置CFW。先将下载下来的zip压缩包解压缩，然后运行压缩包中的`Clash for Windows.exe`。初次运行会自动配置好CFW。
 
-然后找到一个机场，将配置文件导入到CFW中。在
+## Step 3
+然后找到一个机场，将配置文件导入到CFW中。确定该机场代理可用，便可在CFW中打开系统代理，畅享外网的美妙！
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODcwNTkyMTM5XX0=
+eyJoaXN0b3J5IjpbLTEyMTE4MzQ4NjNdfQ==
 -->
