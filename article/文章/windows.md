@@ -4,8 +4,9 @@
 
 ## Step 1 
 首先我们需要准备好代理软件，这里推荐使用Clash for Windows(CFW)。
+[Dreamacro/clash: A rule-based tunnel in Go. (github.com)](https://github.com/Dreamacro/clash)
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDE1MTA4ODUzXX0=
+eyJoaXN0b3J5IjpbLTYxNTY3NDYzM119
 -->
