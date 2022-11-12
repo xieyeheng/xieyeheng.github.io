@@ -8,7 +8,9 @@
 [Dreamacro/clash: A rule-based tunnel in Go. (github.com)](https://github.com/Dreamacro/clash)是CFW的GitHub项目地址，建议下载最新的Release。
 
 ## Step 2
-准备好软件后，我们需要安装并配置CFW。先将下载下来的zip压缩包解压缩，然后运行压缩包中的`Clash for Windows.exe`
+准备好软件后，我们需要安装并配置CFW。先将下载下来的zip压缩包解压缩，然后运行压缩包中的`Clash for Windows.exe`。初次运行会自动配置好CFW。
+
+然后找到一个机场，将配置文件导入到CFW中。在
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyNzI3MzU2ODVdfQ==
+eyJoaXN0b3J5IjpbODcwNTkyMTM5XX0=
 -->
