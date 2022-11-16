@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Î´ÃüÃû1.html</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="generator" content="SynEdit HTML exporter" />
+<style type="text/css">
+<!--
+body { color: #000000; background-color: #171717; }
+.cpp1-assembler { background-color: #171717; color: #009CFF; text-decoration: underline; }
+.cpp1-character { background-color: #171717; color: #C732FB; }
+.cpp1-comment { background-color: #171717; color: #577A57; }
+.cpp1-float { background-color: #171717; color: #EEDEC9; }
+.cpp1-hexadecimal { background-color: #171717; color: #EEDEC9; }
+.cpp1-identifier { background-color: #171717; color: #FFFFFF; }
+.cpp1-illegalchar { background-color: #056109; color: #FFFFFF; }
+.cpp1-number { background-color: #171717; color: #EEDEC9; }
+.cpp1-octal { background-color: #171717; color: #EEDEC9; }
+.cpp1-preprocessor { background-color: #171717; color: #009CFF; }
+.cpp1-reservedword { background-color: #171717; color: #AFFF80; }
+.cpp1-space { background-color: #171717; color: #FFFFFF; }
+.cpp1-string { background-color: #171717; color: #1667CA; }
+.cpp1-symbol { background-color: #171717; color: #FFFFFF; }
+-->
+</style>
+</head>
+<body>
+<pre>
+<code><span style="font: 15pt Consolas;"><span class="cpp1-preprocessor">#include &lt;windows.h&gt;
+#include &lt;cstdio&gt;
+#include &lt;ctime&gt;
+#include &lt;cmath&gt;
+#define pause_key VK_INSERT </span><span class="cpp1-comment">// &Ocirc;&Yacute;&Iacute;&pound;&Aacute;&shy;&micro;&atilde;&deg;&acute;&frac14;&uuml;
+</span><span class="cpp1-preprocessor">#define pause_name &quot;Insert&quot; </span><span class="cpp1-comment">// &ETH;&THORN;&cedil;&Auml;&Aacute;&shy;&micro;&atilde;&Atilde;&ucirc;&sup3;&AElig;
+// &Iuml;&Acirc;&Atilde;&aelig;&iquest;&Eacute;&Ograve;&Ocirc;&sup2;&raquo;&Oacute;&Atilde;&ETH;&THORN;&cedil;&Auml;&pound;&shy;&sup3;&yacute;&middot;&Ccedil;&Auml;&atilde;&Ouml;&ordf;&micro;&Agrave;&Auml;&atilde;&Ocirc;&Uacute;&cedil;&Eacute;&Ecirc;&sup2;&Atilde;&acute;
+</span><span class="cpp1-preprocessor">#define key_down(key_name) ((GetAsyncKeyState(key_name)) ? 1 : 0)
+</span><span class="cpp1-reservedword">void</span><span class="cpp1-space"> show_window(</span><span class="cpp1-reservedword">bool</span><span class="cpp1-space"> show) { ShowWindow(GetConsoleWindow(), show ? SW_SHOW : SW_HIDE); }
+</span><span class="cpp1-reservedword">void</span><span class="cpp1-space"> hide_cursor() { </span><span class="cpp1-comment">// &Ograve;&thorn;&sup2;&Oslash;&sup1;&acirc;&plusmn;&ecirc;
+</span><span class="cpp1-space">	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_CURSOR_INFO CursorInfo;
+	GetConsoleCursorInfo(handle, &amp;CursorInfo);
+	CursorInfo.bVisible = </span><span class="cpp1-reservedword">false</span><span class="cpp1-symbol">;
+	SetConsoleCursorInfo(handle, &amp;CursorInfo);
+}
+</span><span class="cpp1-reservedword">void</span><span class="cpp1-space"> set_window(</span><span class="cpp1-reservedword">int</span><span class="cpp1-space"> r, </span><span class="cpp1-reservedword">int</span><span class="cpp1-space"> c) { SetWindowPos(GetConsoleWindow(), HWND_TOPMOST, </span><span class="cpp1-number">0</span><span class="cpp1-symbol">, </span><span class="cpp1-number">0</span><span class="cpp1-symbol">, r, c, SWP_NOMOVE); } </span><span class="cpp1-comment">// &Eacute;&egrave;&Ouml;&Atilde;&acute;&deg;&iquest;&Uacute;&acute;&oacute;&ETH;&iexcl;
+</span><span class="cpp1-reservedword">void</span><span class="cpp1-space"> color_text(</span><span class="cpp1-reservedword">int</span><span class="cpp1-space"> c) { SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), c); } </span><span class="cpp1-comment">// &cedil;&Auml;&plusmn;&auml;&times;&Ouml;&micro;&Auml;&Ntilde;&Otilde;&Eacute;&laquo;
+</span><span class="cpp1-reservedword">void</span><span class="cpp1-space"> click() { mouse_event(MOUSEEVENTF_LEFTUP | MOUSEEVENTF_LEFTDOWN, </span><span class="cpp1-number">0</span><span class="cpp1-symbol">, </span><span class="cpp1-number">0</span><span class="cpp1-symbol">, </span><span class="cpp1-number">0</span><span class="cpp1-symbol">, </span><span class="cpp1-number">0</span><span class="cpp1-symbol">); } </span><span class="cpp1-comment">// &Auml;&pound;&Auml;&acirc;&micro;&atilde;&raquo;&divide
+</span><span class="cpp1-reservedword">void</span><span class="cpp1-space"> init() {
+	SetWindowPos(GetConsoleWindow(), HWND_TOPMOST, </span><span class="cpp1-number">0</span><span class="cpp1-symbol">, </span><span class="cpp1-number">0</span><span class="cpp1-symbol">, </span><span class="cpp1-number">0</span><span class="cpp1-symbol">, </span><span class="cpp1-number">0</span><span class="cpp1-symbol">, SWP_NOSIZE);
+	DWORD mode;
+	GetConsoleMode(GetStdHandle(STD_INPUT_HANDLE), &amp;mode);
+	mode &amp;= ~ENABLE_QUICK_EDIT_MODE;
+	SetConsoleMode(GetStdHandle(STD_INPUT_HANDLE), mode);
+	SetWindowLong(GetConsoleWindow(), GWL_STYLE, GetWindowLong(GetConsoleWindow(), GWL_STYLE) &amp; ~WS_CAPTION);
+}
+</span><span class="cpp1-reservedword">long</span><span class="cpp1-space"> </span><span class="cpp1-reservedword">long</span><span class="cpp1-space"> spd;
+</span><span class="cpp1-reservedword">void</span><span class="cpp1-space"> config() {
+	system(</span><span class="cpp1-string">&quot;cls&quot;</span><span class="cpp1-symbol">), set_window(</span><span class="cpp1-number">250</span><span class="cpp1-symbol">, </span><span class="cpp1-number">85</span><span class="cpp1-symbol">);
+	printf(</span><span class="cpp1-string">&quot;&Ccedil;&euml;&Ecirc;&auml;&Egrave;&euml;&Euml;&Ugrave;¶È&sup2;&Icirc;&Ecirc;&yacute;\n&Ocirc;&frac12;&ETH;&iexcl;&Ocirc;&frac12;&iquest;&igrave;&pound;&shy;&Auml;&shy;&Egrave;&Iuml; 1e7\n: &quot;</span><span class="cpp1-symbol">);
+	</span><span class="cpp1-reservedword">double</span><span class="cpp1-space"> spd_d;
+	</span><span class="cpp1-reservedword">if</span><span class="cpp1-symbol">(std::scanf(</span><span class="cpp1-string">&quot;%lf&quot;</span><span class="cpp1-symbol">, &amp;spd_d) != </span><span class="cpp1-number">1</span><span class="cpp1-symbol">) spd = </span><span class="cpp1-number">10000000</span><span class="cpp1-symbol">;
+	</span><span class="cpp1-reservedword">else</span><span class="cpp1-space"> spd = round(spd_d);
+}
+</span><span class="cpp1-reservedword">void</span><span class="cpp1-space"> pause() {
+	system(</span><span class="cpp1-string">&quot;cls&quot;</span><span class="cpp1-symbol">), set_window(</span><span class="cpp1-number">250</span><span class="cpp1-symbol">, </span><span class="cpp1-number">85</span><span class="cpp1-symbol">);
+	color_text(</span><span class="cpp1-hexadecimal">0x04</span><span class="cpp1-symbol">);
+	printf(</span><span class="cpp1-string">&quot;&Aacute;&shy;&micro;&atilde;&AElig;&divide&Ocirc;&Yacute;&Iacute;&pound;&Ouml;&ETH;. . . &quot;</span><span class="cpp1-symbol">);
+	color_text(</span><span class="cpp1-hexadecimal">0x07</span><span class="cpp1-symbol">);
+	printf(</span><span class="cpp1-string">&quot;\n&micro;&plusmn;&Ccedil;&deg;&Euml;&Ugrave;¶È&sup2;&Icirc;&Ecirc;&yacute; %lld\n¶Ì&deg;&acute; &quot;</span><span class="cpp1-space"> pause_name </span><span class="cpp1-string">&quot; &iquest;&ordf;&Ecirc;&frac14;/&Ocirc;&Yacute;&Iacute;&pound;&Aacute;&shy;&micro;&atilde;\n&sup3;&curren;&deg;&acute; 1 &Atilde;&euml; &quot;</span><span class="cpp1-space"> pause_name </span><span class="cpp1-string">&quot; &cedil;&Auml;&plusmn;&auml;&sup2;&Icirc;&Ecirc;&yacute;&quot;</span><span class="cpp1-symbol">, spd);
+	printf(</span><span class="cpp1-string">&quot;\n\n&Igrave;&aacute;&Ecirc;&frac34;&pound;&shy;insert&frac14;&uuml;&Ocirc;&Uacute;&middot;&frac12;&Iuml;&ograve;&frac14;&uuml;&Eacute;&Iuml;&Atilde;&aelig;&quot;</span><span class="cpp1-symbol">);
+	hide_cursor();
+}
+</span><span class="cpp1-reservedword">void</span><span class="cpp1-space"> resume() {
+	system(</span><span class="cpp1-string">&quot;cls&quot;</span><span class="cpp1-symbol">), set_window(</span><span class="cpp1-number">190</span><span class="cpp1-symbol">, </span><span class="cpp1-number">35</span><span class="cpp1-symbol">), color_text(</span><span class="cpp1-hexadecimal">0x02</span><span class="cpp1-symbol">);
+	printf(</span><span class="cpp1-string">&quot;&Aacute;&shy;&micro;&atilde;&AElig;&divide&Ograve;&Ntilde;&iquest;&ordf;&AElig;&ocirc;. . . &quot;</span><span class="cpp1-symbol">);
+	color_text(</span><span class="cpp1-hexadecimal">0x07</span><span class="cpp1-symbol">);
+	hide_cursor();
+}
+</span><span class="cpp1-reservedword">int</span><span class="cpp1-space"> main() {
+	printf(</span><span class="cpp1-string">&quot;&sup2;&Icirc;&iquest;&frac14;&Iacute;&oslash;&Eacute;&Iuml;&frac12;&Igrave;&sup3;&Igrave;&Ouml;&AElig;&times;&divide&quot;</span><span class="cpp1-symbol">);
+	init();
+	show_window(</span><span class="cpp1-reservedword">true</span><span class="cpp1-symbol">);
+	</span><span class="cpp1-reservedword">bool</span><span class="cpp1-space"> state;
+	config();
+	state = </span><span class="cpp1-reservedword">false</span><span class="cpp1-symbol">, pause();
+	</span><span class="cpp1-reservedword">while</span><span class="cpp1-symbol">(!key_down(pause_key)) Sleep(</span><span class="cpp1-number">10</span><span class="cpp1-symbol">);
+	state = </span><span class="cpp1-reservedword">true</span><span class="cpp1-symbol">, resume();
+	</span><span class="cpp1-reservedword">while</span><span class="cpp1-symbol">(</span><span class="cpp1-reservedword">true</span><span class="cpp1-symbol">) {
+		</span><span class="cpp1-reservedword">if</span><span class="cpp1-symbol">(state)
+			</span><span class="cpp1-reservedword">while</span><span class="cpp1-symbol">(</span><span class="cpp1-reservedword">true</span><span class="cpp1-symbol">) {
+				click();
+				</span><span class="cpp1-reservedword">for</span><span class="cpp1-symbol">(</span><span class="cpp1-reservedword">long</span><span class="cpp1-space"> </span><span class="cpp1-reservedword">long</span><span class="cpp1-space"> i = </span><span class="cpp1-number">1</span><span class="cpp1-symbol">; i &lt;= spd; ++i)
+					</span><span class="cpp1-reservedword">if</span><span class="cpp1-symbol">(!(i &amp; </span><span class="cpp1-hexadecimal">0x1ffffff</span><span class="cpp1-symbol">) &amp;&amp; key_down(pause_key))
+						{ pause(); </span><span class="cpp1-reservedword">goto</span><span class="cpp1-space"> __judge__; }
+				</span><span class="cpp1-reservedword">if</span><span class="cpp1-symbol">(key_down(pause_key)) { pause(); </span><span class="cpp1-reservedword">goto</span><span class="cpp1-space"> __judge__; }
+			}
+		</span><span class="cpp1-reservedword">else</span><span class="cpp1-space"> Sleep(</span><span class="cpp1-number">10</span><span class="cpp1-symbol">);
+		</span><span class="cpp1-reservedword">if</span><span class="cpp1-symbol">(key_down(pause_key)) {
+			__judge__:
+			</span><span class="cpp1-reservedword">long</span><span class="cpp1-space"> </span><span class="cpp1-reservedword">long</span><span class="cpp1-space"> st = clock();
+			</span><span class="cpp1-reservedword">while</span><span class="cpp1-symbol">(key_down(pause_key)) Sleep(</span><span class="cpp1-number">10</span><span class="cpp1-symbol">);
+			</span><span class="cpp1-reservedword">if</span><span class="cpp1-symbol">(clock() - st &gt;= </span><span class="cpp1-number">1000</span><span class="cpp1-symbol">) config(), pause(), state = </span><span class="cpp1-reservedword">false</span><span class="cpp1-symbol">;
+			</span><span class="cpp1-reservedword">else</span><span class="cpp1-space"> state ^= </span><span class="cpp1-number">1</span><span class="cpp1-symbol">, state ? resume() : pause();
+		}
+	}
+	</span><span class="cpp1-reservedword">return</span><span class="cpp1-space"> </span><span class="cpp1-number">0</span><span class="cpp1-symbol">;
+}
+</span></span>
+</code></pre>
+</body>
+</html>
